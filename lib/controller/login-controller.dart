@@ -30,14 +30,19 @@ class LoginController extends ChangeNotifier {
     // notifyListeners();
   }
 
-  Future onClickSaveBtn(
-      {String identity, String password, BuildContext context}) async {
+  Future onClickSaveBtn({
+    String identity,
+    String password,
+    BuildContext context,
+  }) async {
     LoginRequest _loginRequest;
     _loginRequest = LoginRequest(
         identity: identity, password: password, returnUrl: "String");
     showLoading = true;
     notifyListeners();
-    BaseModel response = await PostUsecase().userLogIn(_loginRequest.toJson());
+    BaseModel response = await PostUsecase().userLogIn(
+      _loginRequest.toJson(),
+    );
 
     if (response.data != null) {
       showLoading = false;
@@ -56,6 +61,10 @@ class LoginController extends ChangeNotifier {
       showLoading = false;
       notifyListeners();
       loginResponseError = response.getException;
+      await Future.delayed(
+        Duration(seconds: 3),
+      );
+      loginResponseError=null;
       loginResponseData = null;
       notifyListeners();
       print("Login Controller Response Error:: " + loginResponseError);

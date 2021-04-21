@@ -1,12 +1,7 @@
-import 'dart:convert';
 // import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:merogames/api/post_usecase.dart';
 import 'package:merogames/constants/constants.dart';
 import 'package:merogames/controller/login-controller.dart';
-import 'package:merogames/exception_handling/base_model.dart';
-import 'package:merogames/exception_handling/server_error.dart';
-import 'package:merogames/models/login_response.dart';
 import 'package:merogames/widgets/custom-textfield.dart';
 import 'package:merogames/widgets/general-elevated-button.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +18,7 @@ class LoginScreen extends StatelessWidget {
     _loginStateController = Provider.of<LoginController>(context);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: _loginStateController.showLoading
             ? Center(
@@ -43,12 +39,14 @@ class LoginScreen extends StatelessWidget {
                             _loginStateController.onClickBackBtn(context);
                           },
                           child: _backBtn(context)),
-                      SizedBox(
-                        height: 30,
+
+                     Image.asset('assets/login.jpg',scale: 4,),
+                     SizedBox(
+                        height: 20,
                       ),
                       _titleDesc(context),
                       SizedBox(
-                        height: 50,
+                        height: 20,
                       ),
                       CustomTextfield(
                         controller: _emailController,
@@ -66,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                         icon: Icons.lock_outline,
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       _loginStateController.loginResponseError == null
                           ? SizedBox()
@@ -80,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                                   ),
                             ),
                       SizedBox(
-                        height: 30,
+                        height: 20,
                       ),
                       _generalBtn(context)
                     ],
@@ -162,7 +160,7 @@ class LoginScreen extends StatelessWidget {
               ),
         ),
         SizedBox(
-          height: 20,
+          height: 5,
         ),
         SizedBox(
           width: 340,
