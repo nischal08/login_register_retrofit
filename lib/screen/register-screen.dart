@@ -6,12 +6,24 @@ import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterController _registerStateController;
+  TextEditingController _fnameController;
+  TextEditingController _lnameController;
+  TextEditingController _passController;
+  TextEditingController _conformPassController;
+  TextEditingController _phoneController;
   @override
   Widget build(BuildContext context) {
+    _fnameController = TextEditingController();
+    _lnameController = TextEditingController();
+    _passController = TextEditingController();
+    _conformPassController = TextEditingController();
+    _phoneController = TextEditingController();
     _registerStateController = Provider.of<RegisterController>(context);
     return Scaffold(
       body: SafeArea(
-        child: Container(
+        child: _registerStateController.isLoading
+          ? Center(child: CircularProgressIndicator())
+          :Container(
           margin: EdgeInsets.symmetric(horizontal: 30),
           width: double.infinity,
           child: SingleChildScrollView(
@@ -50,6 +62,7 @@ class RegisterScreen extends StatelessWidget {
     return Column(
       children: [
         CustomTextfield(
+          controller: _fnameController,
           keyboardType: TextInputType.emailAddress,
           label: 'Enter First Name',
           icon: Icons.badge,
@@ -57,23 +70,37 @@ class RegisterScreen extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        CustomTextfield(label: 'Enter Last Name', icon: Icons.badge),
+        CustomTextfield(
+          controller: _lnameController,
+          label: 'Enter Last Name',
+          icon: Icons.badge,
+        ),
         SizedBox(
           height: 20,
         ),
         CustomTextfield(
-            keyboardType: TextInputType.emailAddress,
+            controller: _phoneController,
+            keyboardType: TextInputType.phone,
             label: 'Enter Phone Number',
             icon: Icons.phone),
         SizedBox(
           height: 20,
         ),
-        CustomTextfield(label: 'Enter Password', icon: Icons.lock_outline),
+        CustomTextfield(
+          obscureText: true,
+          controller: _passController,
+          label: 'Enter Password',
+          icon: Icons.lock_outline,
+        ),
         SizedBox(
           height: 20,
         ),
         CustomTextfield(
-            label: 'ReEnter Password Again', icon: Icons.lock_outline),
+          obscureText: true,
+          controller:_conformPassController ,
+          label: 'ReEnter Password Again',
+          icon: Icons.lock_outline,
+        ),
         SizedBox(
           height: 20,
         ),
@@ -89,7 +116,19 @@ class RegisterScreen extends StatelessWidget {
           bgColor: Colors.white,
           label: 'Create Account',
           onPressed: () {
-            _registerStateController.onClickCreateAcc(context);
+            // print(_passController.text);
+            // print(_conformPassController.text);
+            // print(_fnameController.text);
+            // print(_lnameController.text);
+            // print(_phoneController.text);
+            _registerStateController.onClickCreateAccount(
+              context: context,
+              password: _passController.text.trim(),
+              confirmPassword: _conformPassController.text.trim(),
+              fname: _fnameController.text.trim(),
+              lname: _lnameController.text.trim(),
+              phoneNumber: _phoneController.text.trim(),
+            );
           },
         ),
         SizedBox(

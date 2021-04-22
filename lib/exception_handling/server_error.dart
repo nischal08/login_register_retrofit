@@ -41,7 +41,7 @@ class ServerError implements Exception {
 
       case DioErrorType.RESPONSE:
         _errorMessage =
-            "Recieved Invalid Username or Password";
+            "Recieved Invalid Input";
             // "Recieved Invalid status Code ${error.response.statusCode}";
         break;
     }

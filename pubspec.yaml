@@ -25,11 +25,12 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   dio: ^3.0.10
-  fluttertoast: ^8.0.5
+  # fluttertoast: ^8.0.5
   json_annotation: ^3.1.0
   logger: any
   provider: ^5.0.0
   retrofit: ^1.3.4+1
+  otp_text_field: ^1.1.0
   shared_preferences: ^2.0.5
 
 dev_dependencies:
